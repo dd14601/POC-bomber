@@ -44,6 +44,29 @@ def get_poc_modole_list(default_path=""):              # 默认调用此函数�
     poc_module_list = []
     current_path = os.path.abspath('.')
     pocs_base_path = os.path.join(current_path, "pocs" + default_path)
+    #output.status_print(pocs_base_path)
+    poc_path_list = get_dir_files(pocs_base_path)
+    for poc_path in poc_path_list:
+        poc_path = poc_path.replace(current_path, '')
+        poc_modole_path = path_to_modolepath(poc_path)
+        try:
+            poc_module_list.append(importlib.import_module(poc_modole_path))
+        except:
+            pass
+    return poc_module_list
+    
+def get_poc_modole_list_2(default_path=""):              # 适配windows下环境，默认调用此函数获取 /pocs 下的全部 poc，及根据传入路径获取文件夹全部poc
+    poc_module_list = []
+    #current_path = os.path.abspath('.')
+    #pocs_base_path = os.path.join(current_path, "pocs" + default_path)
+    default_path_list = default_path.split('/')
+    current_path = os.path.abspath('.')
+    pocs_base_path = os.path.join(current_path, "pocs")
+    for path in default_path_list:
+        if path is None:
+            pass
+        pocs_base_path = os.path.join(pocs_base_path ,path)
+    #output.status_print(pocs_base_path)
     poc_path_list = get_dir_files(pocs_base_path)
     for poc_path in poc_path_list:
         poc_path = poc_path.replace(current_path, '')
@@ -58,7 +81,7 @@ def get_poc_modole_list(default_path=""):              # 默认调用此函数�
 def get_poc_modole_list_by_search(search_keys_list):     # 此函数通过搜索poc文件名调用相应的poc, 传入poc文件名列表, 返回由poc对象的列表
     for search_key in search_keys_list:
         if "/" in search_key:
-            poc_module_list = get_poc_modole_list(search_key)
+            poc_module_list = get_poc_modole_list_2(search_key)
             return poc_module_list
     search_flag = True
     poc_modole_list = []
