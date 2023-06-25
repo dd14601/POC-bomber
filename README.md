@@ -43,13 +43,13 @@ POC bomber默认使用验证模式进行poc的验证，如返回结果中attack�
                 获取poc/exp信息:   python3 pocbomber.py --show
                 单目标检测:        python3 pocbomber.py -u http://xxx.xxx.xx
                 批量检测:          python3 pocbomber.py -f url.txt -o report.txt 
-                指定poc检测:       python3 pocbomber.py -f url.txt --poc="thinkphp2_rce.py"
+                指定poc检测:       python3 pocbomber.py -f url.txt --poc="thinkphp2_rce.py" 或者指定文件号目录 -p /web/yongyou  默认pocs下的文件夹
                 exp攻击模式:       python3 pocbomber.py -u 目标url --poc="指定poc文件" --attack
         参数:
                 -u  --url      目标url
                 -f  --file     指定目标url文件   
                 -o  --output   指定生成报告的文件(默认不生成报告)
-                -p  --poc      指定单个或多个poc进行检测, 直接传入poc文件名, 多个poc用(,)分开
+                -p  --poc      指定单个或多个poc进行检测, 直接传入poc文件名, 多个poc用(,)分开,或者指定文件号目录 -p /web/yongyou  默认pocs下的文件夹
                 -t  --thread   指定线程池最大并发数量(默认30)
                 --show         展示poc/exp详细信息
                 --attack       使用poc文件中的exp进行攻击
